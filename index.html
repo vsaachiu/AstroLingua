@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AstroLingua — Learn Chinese Asteroids</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header class="topbar">
+        <h1>AstroLingua</h1>
+        <div class="controls">
+            <button id="startBtn" title="Start a new game">Start</button>
+            <button id="pauseBtn" title="Pause/Resume" disabled>Pause</button>
+            <button id="resetBtn" title="Reset game" disabled>Reset</button>
+            <label class="upload">
+                <input id="vocabUpload" type="file" accept=".csv,.json" />
+                <span>Upload Vocab (.csv or .json)</span>
+            </label>
+        </div>
+    </header>
+
+    <main class="layout">
+        <aside class="hud">
+            <div class="stat"><span class="label">Level</span><span id="level">1</span></div>
+            <div class="stat"><span class="label">Score</span><span id="score">0</span></div>
+            <div class="stat"><span class="label">Lives</span><span id="lives">3</span></div>
+            <div class="stat"><span class="label">Hits</span><span id="hits">0</span></div>
+            <div class="stat"><span class="label">Misses</span><span id="misses">0</span></div>
+            <div class="stat"><span class="label">Accuracy</span><span id="accuracy">0%</span></div>
+            <hr />
+            <div class="prompt">
+                <div class="prompt-label">Shoot the asteroid with the Chinese for:</div>
+                <div id="targetWord" class="target">—</div>
+            </div>
+            <details class="help">
+                <summary>How to play</summary>
+                <ul>
+                    <li>Arrow keys or WASD to steer and thrust</li>
+                    <li>Space to shoot</li>
+                    <li>Hit the asteroid with the correct Chinese translation</li>
+                    <li>Upload your own vocab list: CSV (english, chinese) or JSON array</li>
+                </ul>
+            </details>
+            <details>
+                <summary>Sample CSV</summary>
+                <pre>hello,你好
+thank you,谢谢
+apple,苹果
+blue,蓝色
+cat,猫</pre>
+            </details>
+        </aside>
+
+        <section class="stage">
+            <canvas id="game" width="960" height="600" aria-label="AstroLingua Game Canvas"></canvas>
+            <div id="overlay" class="overlay hidden"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <span>Retro-style learning game. © AstroLingua</span>
+    </footer>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>

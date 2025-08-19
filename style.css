@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --bg: #0b1020;
+  --bg-2: #0e1630;
+  --fg: #e2f1ff;
+  --accent: #00ffc6;
+  --accent-2: #ff3d81;
+  --warn: #ffd166;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: radial-gradient(1200px 600px at 50% 10%, #111a3a 0%, var(--bg) 60%);
+  color: var(--fg);
+  font-family: 'Share Tech Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: linear-gradient(0deg, var(--bg) 0%, var(--bg-2) 100%);
+  border-bottom: 1px solid #1e2a56;
+}
+.topbar h1 {
+  margin: 0;
+  font: 700 18px 'Press Start 2P', cursive;
+  letter-spacing: 1px;
+}
+.controls { display: flex; gap: 8px; align-items: center; }
+
+button, .upload span {
+  background: #0f1a3a;
+  color: var(--fg);
+  border: 1px solid #31418a;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform .05s ease, box-shadow .1s ease, background .2s;
+}
+button:hover, .upload span:hover { background: #132250; box-shadow: 0 0 0 2px #1b2a60 inset; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+
+.upload { position: relative; overflow: hidden; display: inline-flex; }
+.upload input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+.layout { display: grid; grid-template-columns: 280px 1fr; gap: 12px; padding: 12px; }
+
+.hud {
+  background: #0c1636aa;
+  border: 1px solid #1f2e66;
+  border-radius: 10px;
+  padding: 12px;
+  height: fit-content;
+}
+.hud .stat { display: flex; justify-content: space-between; margin: 6px 0; }
+.hud .label { opacity: .8; }
+.target { font: 700 18px 'Press Start 2P', cursive; color: var(--accent); margin-top: 8px; }
+.help { margin-top: 12px; }
+.help summary { cursor: pointer; }
+pre { background: #0a1330; padding: 10px; border-radius: 6px; border: 1px solid #1a2a60; color: #c5e4ff; }
+
+.stage { position: relative; display: grid; place-items: center; }
+canvas#game {
+  width: 100%;
+  height: auto;
+  max-height: calc(100vh - 200px);
+  border: 1px solid #1f2e66;
+  background: radial-gradient(900px 500px at 50% 50%, #0a1130 0%, #050a1a 70%);
+  border-radius: 10px;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--fg);
+  background: rgba(5,10,26,.55);
+  backdrop-filter: blur(2px);
+  border-radius: 10px;
+  padding: 24px;
+}
+.overlay.hidden { display: none; }
+
+.overlay .panel {
+  background: #0a1330;
+  border: 1px solid #1b2a60;
+  border-radius: 12px;
+  padding: 18px;
+  width: min(520px, 90%);
+}
+.panel h2 { margin: 0 0 10px; font-family: 'Press Start 2P', cursive; font-size: 18px; }
+.panel p { margin: 6px 0; }
+.panel .row { display: flex; justify-content: space-between; margin: 4px 0; }
+.panel .big { font-size: 22px; color: var(--accent); }
+.panel .warn { color: var(--warn); }
+.panel .bad { color: var(--accent-2); }
+
+.footer { text-align: center; opacity: .7; font-size: 12px; padding: 10px; }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .hud { order: 2; }
+  .stage { order: 1; }
+}
