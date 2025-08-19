@@ -270,22 +270,22 @@ function drawShip() {
   ctx.save();
   ctx.translate(s.x, s.y);
   ctx.rotate(s.angle);
-  ctx.strokeStyle = '#00ffc6';
+  ctx.strokeStyle = '#f2a65a';
   ctx.lineWidth = 2;
+  // Stylized cowboy hat ship
   ctx.beginPath();
-  ctx.moveTo(16, 0);
-  ctx.lineTo(-12, -10);
-  ctx.lineTo(-8, -6);
-  ctx.lineTo(-8, 6);
-  ctx.lineTo(-12, 10);
-  ctx.closePath();
+  ctx.moveTo(14, -2);
+  ctx.quadraticCurveTo(6, -10, -6, -8);
+  ctx.quadraticCurveTo(-12, -2, -16, -2);
+  ctx.quadraticCurveTo(-4, 4, 12, 2);
+  ctx.quadraticCurveTo(18, 0, 14, -2);
   ctx.stroke();
-  // Thrust flame
+  // Dust trail when thrusting
   if (State.input.up && (Math.floor(now()/100) % 2 === 0)) {
-    ctx.strokeStyle = '#ff3d81';
+    ctx.strokeStyle = '#b55239';
     ctx.beginPath();
-    ctx.moveTo(-12, 0);
-    ctx.lineTo(-20, 0);
+    ctx.moveTo(-14, 0);
+    ctx.lineTo(-22, 0);
     ctx.stroke();
   }
   // Blink when invulnerable
@@ -302,23 +302,23 @@ function drawAsteroid(a) {
   ctx.save();
   ctx.translate(a.x, a.y);
   ctx.rotate(a.angle);
-  ctx.strokeStyle = a.isCorrect ? '#ffd166' : '#e2f1ff';
+  ctx.strokeStyle = '#ffe9c7';
   ctx.lineWidth = 2;
-  // jagged rock
-  const r = a.size;
+  // Wanted poster rectangle
+  const w = a.size * 1.2;
+  const h = a.size * 1.4;
+  ctx.fillStyle = 'rgba(249,232,204,0.12)';
+  ctx.fillRect(-w/2, -h/2, w, h);
+  ctx.strokeRect(-w/2, -h/2, w, h);
+  // small torn corners
   ctx.beginPath();
-  const spikes = 10;
-  for (let i = 0; i <= spikes; i++) {
-    const ang = (i / spikes) * Math.PI * 2;
-    const rr = r * (0.8 + 0.3 * Math.sin(ang * 3 + a.angle));
-    ctx.lineTo(Math.cos(ang) * rr, Math.sin(ang) * rr);
-  }
-  ctx.closePath();
+  ctx.moveTo(-w/2, -h/2 + 6); ctx.lineTo(-w/2 + 6, -h/2);
+  ctx.moveTo(w/2, h/2 - 6); ctx.lineTo(w/2 - 6, h/2);
   ctx.stroke();
 
   // label (Chinese)
   ctx.rotate(-a.angle);
-  ctx.fillStyle = '#9bd1ff';
+  ctx.fillStyle = '#f6d06f';
   ctx.font = '16px "Share Tech Mono", monospace';
   ctx.textAlign = 'center';
   ctx.fillText(a.text, 0, 6);
@@ -326,7 +326,7 @@ function drawAsteroid(a) {
 }
 
 function drawBullets() {
-  ctx.fillStyle = '#00ffc6';
+  ctx.fillStyle = '#b55239';
   for (const b of State.bullets) {
     ctx.beginPath();
     ctx.arc(b.x, b.y, CONFIG.bullet.radius, 0, Math.PI * 2);
@@ -337,14 +337,14 @@ function drawBullets() {
 function render() {
   ctx.clearRect(0, 0, CONFIG.width, CONFIG.height);
   // stars
-  ctx.fillStyle = 'rgba(255,255,255,0.06)';
+  ctx.fillStyle = 'rgba(255,233,199,0.08)';
   for (let i = 0; i < 80; i++) {
     const x = (i * 123) % CONFIG.width;
     const y = ((i * 234) + Math.floor(now()/30)) % CONFIG.height;
     ctx.fillRect(x, y, 2, 2);
   }
-  // grid glow
-  ctx.strokeStyle = 'rgba(0,255,198,0.08)';
+  // faint corral/fence lines
+  ctx.strokeStyle = 'rgba(242,166,90,0.08)';
   ctx.lineWidth = 1;
   for (let x = 0; x < CONFIG.width; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, CONFIG.height); ctx.stroke(); }
   for (let y = 0; y < CONFIG.height; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(CONFIG.width, y); ctx.stroke(); }
@@ -387,8 +387,8 @@ function endGame() {
 
 function showIntro() {
   showOverlay(`
-    <h2>AstroLingua</h2>
-    <p>Steer your ship, shoot the asteroid with the correct Chinese translation.</p>
+  <h2>AstroLingua</h2>
+  <p>Saddle up! Steer your hat-ship and hit the wanted poster with the correct Chinese translation.</p>
     <ul>
       <li>WASD / Arrow keys to move</li>
       <li>Space to shoot</li>

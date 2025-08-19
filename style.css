@@ -1,19 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&family=Alfa+Slab+One&display=swap');
 
 :root {
-  --bg: #0b1020;
-  --bg-2: #0e1630;
-  --fg: #e2f1ff;
-  --accent: #00ffc6;
-  --accent-2: #ff3d81;
-  --warn: #ffd166;
+  --bg: #2f2319;         /* saddle */
+  --bg-2: #3b2a1d;       /* darker saddle */
+  --fg: #ffe9c7;         /* parchment */
+  --accent: #f2a65a;     /* sunset orange */
+  --accent-2: #b55239;   /* clay red */
+  --warn: #f6d06f;       /* dusty gold */
+  --parchment: #f9e8cc;
+  --ink: #2f2319;
 }
 
 * { box-sizing: border-box; }
 html, body { height: 100%; }
 body {
   margin: 0;
-  background: radial-gradient(1200px 600px at 50% 10%, #111a3a 0%, var(--bg) 60%);
+  background:
+    radial-gradient(1200px 600px at 50% 10%, #513b2a 0%, var(--bg) 60%),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><circle cx="6" cy="10" r="1" fill="%23b28a65"/><circle cx="40" cy="50" r="1" fill="%23b28a65"/><circle cx="70" cy="30" r="1" fill="%23b28a65"/></svg>');
   color: var(--fg);
   font-family: 'Share Tech Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 }
@@ -28,21 +32,21 @@ body {
 }
 .topbar h1 {
   margin: 0;
-  font: 700 18px 'Press Start 2P', cursive;
+  font: 700 22px 'Alfa Slab One', cursive;
   letter-spacing: 1px;
 }
 .controls { display: flex; gap: 8px; align-items: center; }
 
 button, .upload span {
-  background: #0f1a3a;
+  background: #4a3627;
   color: var(--fg);
-  border: 1px solid #31418a;
+  border: 1px solid #6b4c35;
   padding: 8px 10px;
   border-radius: 6px;
   cursor: pointer;
   transition: transform .05s ease, box-shadow .1s ease, background .2s;
 }
-button:hover, .upload span:hover { background: #132250; box-shadow: 0 0 0 2px #1b2a60 inset; }
+button:hover, .upload span:hover { background: #5b3f2b; box-shadow: 0 0 0 2px #7a563b inset; }
 button:disabled { opacity: .5; cursor: not-allowed; }
 
 .upload { position: relative; overflow: hidden; display: inline-flex; }
@@ -51,26 +55,26 @@ button:disabled { opacity: .5; cursor: not-allowed; }
 .layout { display: grid; grid-template-columns: 280px 1fr; gap: 12px; padding: 12px; }
 
 .hud {
-  background: #0c1636aa;
-  border: 1px solid #1f2e66;
+  background: #3a2b1fbb;
+  border: 2px solid #7a563b;
   border-radius: 10px;
   padding: 12px;
   height: fit-content;
 }
 .hud .stat { display: flex; justify-content: space-between; margin: 6px 0; }
 .hud .label { opacity: .8; }
-.target { font: 700 18px 'Press Start 2P', cursive; color: var(--accent); margin-top: 8px; }
+.target { font: 700 18px 'Alfa Slab One', cursive; color: var(--accent); margin-top: 8px; }
 .help { margin-top: 12px; }
 .help summary { cursor: pointer; }
-pre { background: #0a1330; padding: 10px; border-radius: 6px; border: 1px solid #1a2a60; color: #c5e4ff; }
+pre { background: var(--parchment); color: var(--ink); padding: 10px; border-radius: 6px; border: 1px solid #7a563b; }
 
 .stage { position: relative; display: grid; place-items: center; }
 canvas#game {
   width: 100%;
   height: auto;
   max-height: calc(100vh - 200px);
-  border: 1px solid #1f2e66;
-  background: radial-gradient(900px 500px at 50% 50%, #0a1130 0%, #050a1a 70%);
+  border: 2px solid #7a563b;
+  background: radial-gradient(900px 500px at 50% 50%, #3b2a1d 0%, #2a2018 70%);
   border-radius: 10px;
 }
 
@@ -88,16 +92,17 @@ canvas#game {
 .overlay.hidden { display: none; }
 
 .overlay .panel {
-  background: #0a1330;
-  border: 1px solid #1b2a60;
+  background: var(--parchment);
+  color: var(--ink);
+  border: 2px solid #7a563b;
   border-radius: 12px;
   padding: 18px;
   width: min(520px, 90%);
 }
-.panel h2 { margin: 0 0 10px; font-family: 'Press Start 2P', cursive; font-size: 18px; }
+.panel h2 { margin: 0 0 10px; font-family: 'Alfa Slab One', cursive; font-size: 20px; color: var(--accent-2); }
 .panel p { margin: 6px 0; }
 .panel .row { display: flex; justify-content: space-between; margin: 4px 0; }
-.panel .big { font-size: 22px; color: var(--accent); }
+.panel .big { font-size: 22px; color: var(--accent-2); }
 .panel .warn { color: var(--warn); }
 .panel .bad { color: var(--accent-2); }
 
